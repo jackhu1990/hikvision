@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import com.test.demo.*;
 
 
 public class hikvision extends CordovaPlugin {

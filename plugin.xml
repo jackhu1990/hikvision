@@ -30,7 +30,7 @@
         <source-file src="src/android/sdk/HCNetSDK.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/sdk/jna.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/sdk/PlayerSDK.jar" target-dir="libs" framework="true" />
-        <source-file src="src/android/com/" target-dir="src/com/" framework="true" />
+        <source-file src="src/android/com" target-dir="src" framework="true" />
         <source-file src="src/android/libs/armeabi" target-dir="libs" framework="true" />
         <source-file src="src/android/hikvision.java" target-dir="src/com/nodehope/cordova/plugins/hikvision"/>
         <source-file src="src/android/res/layout/main.xml" target-dir="res/layout" framework="true" />
