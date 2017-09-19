@@ -46,6 +46,7 @@ public class hikvision extends CordovaPlugin {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         // 根据resultCode判断处理结果
+        Context context = this.cordova.getActivity().getApplicationContext();
         if (resultCode == Activity.RESULT_OK) {
             String spot = intent.getStringExtra("spot");
             context.success(spot);
