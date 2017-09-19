@@ -117,7 +117,7 @@ public class DemoActivity extends Activity implements Callback {
         CrashUtil crashUtil = CrashUtil.getInstance();
         crashUtil.init(this);
 
-        setContentView(R.layout.main);
+        setContentView(MResource.getIdByName(this, "layout", "main"));
 
         if (!initeSdk()) {
             this.finish();
@@ -216,21 +216,21 @@ public class DemoActivity extends Activity implements Callback {
 
     // get controller instance
     private void findViews() {
-        m_oLoginBtn = (Button) findViewById(R.id.btn_Login);
-        m_oPreviewBtn = (Button) findViewById(R.id.btn_Preview);
-        m_oPlaybackBtn = (Button) findViewById(R.id.btn_Playback);
-        m_oParamCfgBtn = (Button) findViewById(R.id.btn_ParamCfg);
-        m_oCaptureBtn = (Button) findViewById(R.id.btn_Capture);
-        m_oRecordBtn = (Button) findViewById(R.id.btn_Record);
-        m_oTalkBtn = (Button) findViewById(R.id.btn_Talk);
-        m_oPTZBtn = (Button) findViewById(R.id.btn_PTZ);
-        m_oOtherBtn = (Button) findViewById(R.id.btn_OTHER);
-        m_osurfaceView = (SurfaceView) findViewById(R.id.Sur_Player);
-        m_osurfaceView2 = (SurfaceView) findViewById(R.id.surfaceView4);
-        m_oIPAddr = (EditText) findViewById(R.id.EDT_IPAddr);
-        m_oPort = (EditText) findViewById(R.id.EDT_Port);
-        m_oUser = (EditText) findViewById(R.id.EDT_User);
-        m_oPsd = (EditText) findViewById(R.id.EDT_Psd);
+        m_oLoginBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_Login"));
+        m_oPreviewBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_Preview"));
+        m_oPlaybackBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_Playback"));
+        m_oParamCfgBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_ParamCfg"));
+        m_oCaptureBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_Capture"));
+        m_oRecordBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_Record"));
+        m_oTalkBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_Talk"));
+        m_oPTZBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_PTZ"));
+        m_oOtherBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_OTHER"));
+        m_osurfaceView = (SurfaceView) findViewById(MResource.getIdByName(this, "id", "Sur_Player"));
+        m_osurfaceView2 = (SurfaceView) findViewById(MResource.getIdByName(this, "id", "surfaceView4"));
+        m_oIPAddr = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_IPAddr"));
+        m_oPort = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_Port"));
+        m_oUser = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_User"));
+        m_oPsd = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_Psd"));
     }
 
     // listen

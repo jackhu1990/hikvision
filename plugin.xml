@@ -26,6 +26,11 @@
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.INTERNET" />
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.test.demo.DemoActivity">
+            </activity>
+        </config-file>
+
         <source-file src="src/android/sdk/AudioEngineSDK.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/sdk/HCNetSDK.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/sdk/jna.jar" target-dir="libs" framework="true" />
