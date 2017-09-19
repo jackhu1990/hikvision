@@ -1,0 +1,2 @@
+# hikvision
+hikvision cordova plugin
