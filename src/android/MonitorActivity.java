@@ -1,5 +1,5 @@
 /**
- * <p>DemoActivity Class</p>
+ * <p>MonitorActivity Class</p>
  * @author zhuzhenlei 2014-7-17
  * @version V1.0  
  * @modificationHistory
@@ -65,14 +65,14 @@ import com.hikvision.netsdk.RemoteConfigCallback;
 
 /**
  * <pre>
- *  ClassName  DemoActivity Class
+ *  ClassName  MonitorActivity Class
  * </pre>
  * 
  * @author zhuzhenlei
  * @version V1.0
  * @modificationHistory
  */
-public class DemoActivity extends Activity implements Callback {
+public class MonitorActivity extends Activity implements Callback {
     private Button m_oLoginBtn = null;
     private Button m_oPreviewBtn = null;
     private Button m_oPlaybackBtn = null;
@@ -100,7 +100,7 @@ public class DemoActivity extends Activity implements Callback {
     private int m_iChanNum = 0; // channel number
     private static PlaySurfaceView[] playView = new PlaySurfaceView[4];
 
-    private final String TAG = "DemoActivity";
+    private final String TAG = "MonitorActivity";
 
     private boolean m_bTalkOn = false;
     private boolean m_bPTZL = false;
@@ -608,7 +608,7 @@ public class DemoActivity extends Activity implements Callback {
         public void onClick(View v) {
             try {
                 ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
-                        .hideSoftInputFromWindow(DemoActivity.this
+                        .hideSoftInputFromWindow(MonitorActivity.this
                                 .getCurrentFocus().getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
                 if (m_iLogID < 0) {
@@ -1010,7 +1010,7 @@ public class DemoActivity extends Activity implements Callback {
             public void fRealDataCallBack(int iRealHandle, int iDataType,
                     byte[] pDataBuffer, int iDataSize) {
                 // player channel 1
-                DemoActivity.this.processRealData(1, iDataType, pDataBuffer,
+                MonitorActivity.this.processRealData(1, iDataType, pDataBuffer,
                         iDataSize, Player.STREAM_REALTIME);
             }
         };
@@ -1033,7 +1033,7 @@ public class DemoActivity extends Activity implements Callback {
             public void fPlayDataCallBack(int iPlaybackHandle, int iDataType,
                     byte[] pDataBuffer, int iDataSize) {
                 // player channel 1
-                DemoActivity.this.processRealData(1, iDataType, pDataBuffer,
+                MonitorActivity.this.processRealData(1, iDataType, pDataBuffer,
                         iDataSize, Player.STREAM_FILE);
             }
         };
