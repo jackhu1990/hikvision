@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:id="@+id/Play"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <RelativeLayout
+            android:id="@+id/widget_Play"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <SurfaceView
+                android:id="@+id/surfaceView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#0000ff00"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/surfaceView"
+                android:layout_toEndOf="@+id/surfaceView" />
+
+            <TextView
+                android:id="@+id/TV_IP"
+                android:layout_width="25dip"
+                android:layout_height="40dip"
+                android:gravity="center"
+                android:text="IP"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/EDT_IPAddr"
+                android:layout_width="150dip"
+                android:layout_height="40dip"
+                android:layout_toRightOf="@+id/TV_IP"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/TV_Port"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_toRightOf="@+id/EDT_IPAddr"
+                android:gravity="center"
+                android:text="Port"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/EDT_Port"
+                android:layout_width="80dip"
+                android:layout_height="40dip"
+                android:layout_toRightOf="@+id/TV_Port"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/TV_User"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/TV_IP"
+                android:gravity="center"
+                android:text="User"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/EDT_User"
+                android:layout_width="120dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/TV_IP"
+                android:layout_toRightOf="@+id/TV_User"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/TV_Psd"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/TV_IP"
+                android:layout_toRightOf="@+id/EDT_User"
+                android:gravity="center"
+                android:text="Psd"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/EDT_Psd"
+                android:layout_width="120dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/TV_IP"
+                android:layout_toRightOf="@+id/TV_Psd"
+                android:inputType="textPassword"
+                android:text="" />
+
+            <Button
+                android:id="@+id/btn_Login"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/TV_User"
+                android:text="Login"
+                android:textColor="#ff000000"
+                android:typeface="sans" />
+
+            <Button
+                android:id="@+id/btn_Preview"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/TV_User"
+                android:layout_toRightOf="@+id/btn_Login"
+                android:text="Preview"
+                android:textColor="#ff000000"
+                android:typeface="sans" />
+
+            <Button
+                android:id="@+id/btn_Playback"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/TV_User"
+                android:layout_toRightOf="@+id/btn_Preview"
+                android:text="Playback"
+                android:textColor="#ff000000"
+                android:typeface="sans" />
+
+            <SurfaceView
+                android:id="@+id/Sur_Player"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignEnd="@+id/btn_PTZ"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/btn_PTZ"
+                android:layout_below="@+id/btn_ParamCfg"
+                android:layout_marginTop="78dp"
+                android:background="#0000ff00" />
+
+            <Button
+                android:id="@+id/btn_ParamCfg"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:layout_alignLeft="@+id/btn_Playback"
+                android:layout_below="@+id/btn_Playback"
+                android:text="Sub(CIF)"
+                android:textColor="#ff000000"
+                android:typeface="sans" />
+
+            <Button
+                android:id="@+id/btn_Capture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btn_ParamCfg"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@+id/btn_Login"
+                android:layout_alignTop="@+id/btn_ParamCfg"
+                android:text="Capture" />
+
+            <Button
+                android:id="@+id/btn_Record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btn_ParamCfg"
+                android:layout_alignLeft="@+id/btn_Preview"
+                android:layout_alignRight="@+id/btn_Preview"
+                android:layout_below="@+id/btn_Preview"
+                android:text="Record" />
+
+            <Button
+                android:id="@+id/btn_Talk"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:layout_below="@+id/btn_Capture"
+                android:layout_toLeftOf="@+id/btn_Record"
+                android:text="Talk"
+                android:textColor="#ff000000"
+                android:typeface="sans" />
+
+            <Button
+                android:id="@+id/btn_OTHER"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:layout_alignBaseline="@+id/btn_PTZ"
+                android:layout_alignBottom="@+id/btn_PTZ"
+                android:layout_toRightOf="@+id/btn_PTZ"
+                android:text="Other"
+                android:textColor="#ff000000"
+                android:typeface="sans" />
+
+            <Button
+                android:id="@+id/btn_PTZ"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:layout_alignBaseline="@+id/btn_Talk"
+                android:layout_alignBottom="@+id/btn_Talk"
+                android:layout_toLeftOf="@+id/btn_ParamCfg"
+                android:text="PTZ(L)"
+                android:textColor="#ff000000"
+                android:typeface="sans" />
+
+            <SurfaceView
+                android:id="@+id/surfaceView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/btn_OTHER"
+                android:layout_toRightOf="@+id/btn_OTHER"
+                android:layout_alignParentBottom="true"
+                android:layout_alignTop="@+id/Sur_Player" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

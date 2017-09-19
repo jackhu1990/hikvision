@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-hikvision"
+        version="2.3.1">
+
+    <name>hikvision</name>
+    <description>对hikvision视频sdk封装成cordova</description>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+
+    <js-module src="www/hikvision.js" name="hikvision">
+        <clobbers target="window.plugins.hikvision"/>
+    </js-module>
+
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="hikvision">
+                <param name="android-package" value="com.nodehope.cordova.plugins.hikvision.hikvision"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+        <source-file src="src/android/hikvision.java" target-dir="src/com/nodehope/cordova/plugins/hikvision"/>
+        <source-file src="src/android/sdk" target-dir="libs" framework="true" />
+        <source-file src="src/android/libs/armeabi" target-dir="libs" framework="true" />
+        <source-file src="src/android/hikvision.xml" target-dir="res/layout" framework="true" />
+    </platform>
+
+</plugin>
