@@ -33,7 +33,7 @@ public class hikvision extends CordovaPlugin {
             return true;
         } else if (action.equals("startMonitor")) {
             //通过Intent绑定将要调用的Activity
-            Intent intent = new Intent(this.cordova.getActivity(), MonitorActivity.class);
+            Intent intent = new Intent(this.cordova.getActivity(), DemoActivity.class);
             //加入将要传输到activity中的参数
             intent.putExtra("province", args.getString(0));
             //启动activity

@@ -26,11 +26,12 @@
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.INTERNET" />
         </config-file>
-        <source-file src="src/android/hikvision.java" target-dir="src/com/nodehope/cordova/plugins/hikvision"/>
-        <source-file src="src/android/MonitorActivity.java" target-dir="src/com/nodehope/cordova/plugins/hikvision"/>
-        <source-file src="src/android/sdk" target-dir="libs" framework="true" />
+        <source-file src="src/android/sdk/*.*" target-dir="libs" framework="true" />
+        <source-file src="src/android/com/hcnetsdk" target-dir="src/com/hcnetsdk" framework="true" />
         <source-file src="src/android/libs/armeabi" target-dir="libs" framework="true" />
-        <source-file src="src/android/hikvision.xml" target-dir="res/layout" framework="true" />
+        <source-file src="src/android/hikvision.java" target-dir="src/com/nodehope/cordova/plugins/hikvision"/>
+        <source-file src="src/android/code/*.*" target-dir="src"/>
+        <source-file src="src/android/res/layout/main.xml" target-dir="res/layout" framework="true" />
     </platform>
 
 </plugin>
