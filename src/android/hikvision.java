@@ -43,7 +43,7 @@ public class hikvision extends CordovaPlugin {
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-                return false
+                return false;
             }
             return true;
         } else if (action.equals("stopMonitor")) {
@@ -55,6 +55,7 @@ public class hikvision extends CordovaPlugin {
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                return false;
             }
             return true;
         } else if (action.equals("test")) {
@@ -65,6 +66,7 @@ public class hikvision extends CordovaPlugin {
             this.cordova.getActivity().startActivity(intent); // 启动Activity
             Toast.makeText(context, "默认Toast样式",
                     Toast.LENGTH_SHORT).show();
+            return true;
         }
         return false;
     }
