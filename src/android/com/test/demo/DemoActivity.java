@@ -126,6 +126,7 @@ public class DemoActivity extends Activity implements Callback {
 
         setContentView(MResource.getIdByName(this, "layout", "main"));
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         if (!initeSdk()) {
             this.finish();
@@ -140,7 +141,7 @@ public class DemoActivity extends Activity implements Callback {
         m_oPsd.setText("szhj2015");
         m_oIPAddr.setText("102.51.53.246");
         m_oPort.setText("8000");
-        monitorChan = 1;
+        monitorChan = 35;
         // 接收cordova传过来的参数
         m_oUser.setText(this.getIntent().getStringExtra("username"));
         m_oPsd.setText(this.getIntent().getStringExtra("password"));
@@ -176,6 +177,9 @@ public class DemoActivity extends Activity implements Callback {
             this.fullSceen = false;
             this.m_oFullSceenBtn.setText("全屏");
         }
+    }
+    public void Goback(View view) {
+        this.finish();
     }
 
     public void startMonitor() {
@@ -747,7 +751,8 @@ public class DemoActivity extends Activity implements Callback {
         Log.i(TAG, "m_iStartChan:" + m_iStartChan);
 
         NET_DVR_PREVIEWINFO previewInfo = new NET_DVR_PREVIEWINFO();
-        previewInfo.lChannel = m_iStartChan + monitorChan;
+        // previewInfo.lChannel = m_iStartChan + monitorChan;
+        previewInfo.lChannel = monitorChan;
         previewInfo.dwStreamType = 0; // substream
         previewInfo.bBlocked = 1;
 //         NET_DVR_CLIENTINFO struClienInfo = new NET_DVR_CLIENTINFO();

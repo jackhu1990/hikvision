@@ -222,7 +222,17 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:onClick="SwitchfullSceen"
-                android:text="全屏" />
+                android:text="全屏"
+                android:visibility="invisible" />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/EDT_Psd"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:onClick="Goback"
+                android:text="返回"/>
 
         </RelativeLayout>
     </LinearLayout>
