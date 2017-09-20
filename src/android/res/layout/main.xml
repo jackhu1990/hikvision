@@ -31,14 +31,16 @@
                 android:layout_height="40dip"
                 android:gravity="center"
                 android:text="IP"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/EDT_IPAddr"
                 android:layout_width="150dip"
                 android:layout_height="40dip"
                 android:layout_toRightOf="@+id/TV_IP"
-                android:text="" />
+                android:text=""
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/TV_Port"
@@ -47,24 +49,28 @@
                 android:layout_toRightOf="@+id/EDT_IPAddr"
                 android:gravity="center"
                 android:text="Port"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/EDT_Port"
                 android:layout_width="80dip"
                 android:layout_height="40dip"
                 android:layout_toRightOf="@+id/TV_Port"
-                android:text="" />
+                android:text=""
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/TV_User"
                 android:layout_width="40dip"
                 android:layout_height="40dip"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/TV_IP"
                 android:gravity="center"
                 android:text="User"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/EDT_User"
@@ -72,7 +78,8 @@
                 android:layout_height="40dip"
                 android:layout_below="@+id/TV_IP"
                 android:layout_toRightOf="@+id/TV_User"
-                android:text="" />
+                android:text=""
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/TV_Psd"
@@ -82,16 +89,19 @@
                 android:layout_toRightOf="@+id/EDT_User"
                 android:gravity="center"
                 android:text="Psd"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible" />
 
             <EditText
                 android:id="@+id/EDT_Psd"
                 android:layout_width="120dip"
                 android:layout_height="40dip"
-                android:layout_below="@+id/TV_IP"
+                android:layout_below="@+id/TV_Port"
+                android:layout_toEndOf="@+id/TV_Psd"
                 android:layout_toRightOf="@+id/TV_Psd"
                 android:inputType="textPassword"
-                android:text="" />
+                android:text=""
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btn_Login"
@@ -100,38 +110,41 @@
                 android:layout_below="@+id/TV_User"
                 android:text="Login"
                 android:textColor="#ff000000"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btn_Preview"
-                android:layout_width="100dip"
+                android:layout_width="150dip"
                 android:layout_height="40dip"
-                android:layout_below="@+id/TV_User"
-                android:layout_toRightOf="@+id/btn_Login"
-                android:text="Preview"
+                android:text="播放实时画面"
                 android:textColor="#ff000000"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/btn_Login"
+                android:layout_toEndOf="@+id/btn_Login" />
 
             <Button
                 android:id="@+id/btn_Playback"
                 android:layout_width="100dip"
                 android:layout_height="40dip"
-                android:layout_below="@+id/TV_User"
-                android:layout_toRightOf="@+id/btn_Preview"
+                android:layout_below="@+id/EDT_Psd"
+                android:layout_toEndOf="@+id/TV_Psd"
+                android:layout_toRightOf="@+id/TV_Psd"
                 android:text="Playback"
                 android:textColor="#ff000000"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:visibility="invisible" />
 
             <SurfaceView
                 android:id="@+id/Sur_Player"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_alignEnd="@+id/btn_PTZ"
                 android:layout_alignParentLeft="true"
-                android:layout_alignRight="@+id/btn_PTZ"
-                android:layout_below="@+id/btn_ParamCfg"
-                android:layout_marginTop="78dp"
-                android:background="#0000ff00" />
+                android:background="#0000ff00"
+                android:layout_below="@+id/TV_IP"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <Button
                 android:id="@+id/btn_ParamCfg"
@@ -141,7 +154,8 @@
                 android:layout_below="@+id/btn_Playback"
                 android:text="Sub(CIF)"
                 android:textColor="#ff000000"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btn_Capture"
@@ -151,7 +165,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignRight="@+id/btn_Login"
                 android:layout_alignTop="@+id/btn_ParamCfg"
-                android:text="Capture" />
+                android:text="Capture"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btn_Record"
@@ -161,7 +176,8 @@
                 android:layout_alignLeft="@+id/btn_Preview"
                 android:layout_alignRight="@+id/btn_Preview"
                 android:layout_below="@+id/btn_Preview"
-                android:text="Record" />
+                android:text="Record"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btn_Talk"
@@ -171,7 +187,8 @@
                 android:layout_toLeftOf="@+id/btn_Record"
                 android:text="Talk"
                 android:textColor="#ff000000"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btn_OTHER"
@@ -182,7 +199,8 @@
                 android:layout_toRightOf="@+id/btn_PTZ"
                 android:text="Other"
                 android:textColor="#ff000000"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btn_PTZ"
@@ -193,16 +211,18 @@
                 android:layout_toLeftOf="@+id/btn_ParamCfg"
                 android:text="PTZ(L)"
                 android:textColor="#ff000000"
-                android:typeface="sans" />
+                android:typeface="sans"
+                android:visibility="invisible" />
 
-            <SurfaceView
-                android:id="@+id/surfaceView4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@+id/btn_OTHER"
-                android:layout_toRightOf="@+id/btn_OTHER"
-                android:layout_alignParentBottom="true"
-                android:layout_alignTop="@+id/Sur_Player" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/EDT_Psd"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:onClick="SwitchfullSceen"
+                android:text="全屏" />
 
         </RelativeLayout>
     </LinearLayout>

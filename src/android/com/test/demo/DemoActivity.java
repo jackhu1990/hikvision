@@ -3,7 +3,7 @@
  * @author zhuzhenlei 2014-7-17
  * @version V1.0
  * @modificationHistory
- * @modify by user: 
+ * @modify by user:
  * @modify by reason:
  */
 package com.test.demo;
@@ -15,6 +15,8 @@ import org.MediaPlayer.PlayM4.Player;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -29,6 +31,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,6 +78,7 @@ import android.widget.Toast;
  */
 public class DemoActivity extends Activity implements Callback {
     private Button m_oLoginBtn = null;
+    private Button m_oFullSceenBtn = null;
     private Button m_oPreviewBtn = null;
     private Button m_oPlaybackBtn = null;
     private Button m_oParamCfgBtn = null;
@@ -83,7 +88,6 @@ public class DemoActivity extends Activity implements Callback {
     private Button m_oPTZBtn = null;
     private Button m_oOtherBtn = null;
     private SurfaceView m_osurfaceView = null;
-    private SurfaceView m_osurfaceView2 = null;
     private EditText m_oIPAddr = null;
     private EditText m_oPort = null;
     private EditText m_oUser = null;
@@ -97,6 +101,8 @@ public class DemoActivity extends Activity implements Callback {
 
     private int m_iPort = -1; // play port
     private int m_iStartChan = 0; // start channel no
+    private int monitorChan = 0; // monitorChan no
+    private boolean fullSceen = false;
     private int m_iChanNum = 0; // channel number
     private static PlaySurfaceView[] playView = new PlaySurfaceView[4];
 
@@ -116,8 +122,10 @@ public class DemoActivity extends Activity implements Callback {
         super.onCreate(savedInstanceState);
         CrashUtil crashUtil = CrashUtil.getInstance();
         crashUtil.init(this);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(MResource.getIdByName(this, "layout", "main"));
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         if (!initeSdk()) {
             this.finish();
@@ -128,16 +136,76 @@ public class DemoActivity extends Activity implements Callback {
             this.finish();
             return;
         }
-        m_oIPAddr.setText("102.51.53.246");
-
-        m_oPort.setText("8000");
         m_oUser.setText("admin");
         m_oPsd.setText("szhj2015");
+        m_oIPAddr.setText("102.51.53.246");
+        m_oPort.setText("8000");
+        monitorChan = 1;
+       Toast.makeText(this.getApplicationContext(), this.getIntent().getStringExtra("username"), Toast.LENGTH_SHORT).show();
 
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // 加入横屏要处理的代码
+            this.fullSceen = true;
+            this.m_oFullSceenBtn.setText("竖屏");
+        } else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            // 加入竖屏要处理的代码
+            this.m_oFullSceenBtn.setText("全屏");
+        }
+        this.startMonitor();
+    }
 
-        Toast.makeText(this.getApplicationContext(), this.getIntent().getStringExtra("username"),
-                Toast.LENGTH_SHORT).show();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.stopMonitor();
+    }
+    public void SwitchfullSceen(View view) {
+        if (!this.fullSceen){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            this.fullSceen = true;
+            this.m_oFullSceenBtn.setText("竖屏");
+        }
+        else{
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            this.fullSceen = false;
+            this.m_oFullSceenBtn.setText("全屏");
+        }
+    }
 
+    public void startMonitor() {
+        // login on the device
+        m_iLogID = loginDevice();
+        if (m_iLogID < 0) {
+            Log.e(TAG, "This device logins failed!");
+            return;
+        } else {
+            System.out.println("m_iLogID=" + m_iLogID);
+        }
+        // get instance of exception callback and set
+        ExceptionCallBack oexceptionCbf = getExceptiongCbf();
+        if (oexceptionCbf == null) {
+            Log.e(TAG, "ExceptionCallBack object is failed!");
+            return;
+        }
+
+        if (!HCNetSDK.getInstance().NET_DVR_SetExceptionCallBack(
+                oexceptionCbf)) {
+            Log.e(TAG, "NET_DVR_SetExceptionCallBack is failed!");
+            return;
+        }
+        m_oLoginBtn.setText("Logout");
+        Log.i(TAG, "Login sucess ****************************1***************************");
+        m_oPreviewBtn.performClick();
+    }
+    public void stopMonitor() {
+        m_oPreviewBtn.performClick();
+        // whether we have logout
+        if (!HCNetSDK.getInstance().NET_DVR_Logout_V30(m_iLogID)) {
+            Log.e(TAG, " NET_DVR_Logout is failed!");
+            return;
+        }
+        m_oLoginBtn.setText("Login");
+        m_iLogID = -1;
     }
 
     // @Override
@@ -213,7 +281,6 @@ public class DemoActivity extends Activity implements Callback {
     private boolean initeActivity() {
         findViews();
         m_osurfaceView.getHolder().addCallback(this);
-        m_osurfaceView2.getHolder().addCallback(this);
         setListeners();
         return true;
     }
@@ -230,11 +297,11 @@ public class DemoActivity extends Activity implements Callback {
         m_oPTZBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_PTZ"));
         m_oOtherBtn = (Button) findViewById(MResource.getIdByName(this, "id", "btn_OTHER"));
         m_osurfaceView = (SurfaceView) findViewById(MResource.getIdByName(this, "id", "Sur_Player"));
-        m_osurfaceView2 = (SurfaceView) findViewById(MResource.getIdByName(this, "id", "surfaceView4"));
         m_oIPAddr = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_IPAddr"));
         m_oPort = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_Port"));
         m_oUser = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_User"));
         m_oPsd = (EditText) findViewById(MResource.getIdByName(this, "id", "EDT_Psd"));
+        m_oFullSceenBtn = (Button) findViewById(MResource.getIdByName(this, "id", "button"));
     }
 
     // listen
@@ -251,7 +318,7 @@ public class DemoActivity extends Activity implements Callback {
     }
 
     // ptz listener
-    private Button.OnTouchListener PTZ_Listener = new OnTouchListener() {
+    private OnTouchListener PTZ_Listener = new OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             try {
@@ -317,7 +384,7 @@ public class DemoActivity extends Activity implements Callback {
         }
     };
     // preset listener
-    private Button.OnClickListener OtherFunc_Listener = new OnClickListener() {
+    private OnClickListener OtherFunc_Listener = new OnClickListener() {
         public void onClick(View v) {
             // PTZTest.TEST_PTZ(m_iPlayID, m_iLogID, m_iStartChan);
             // ConfigTest.Test_ScreenConfig(m_iLogID, m_iStartChan);
@@ -341,7 +408,7 @@ public class DemoActivity extends Activity implements Callback {
         }
     };
     // Talk listener
-    private Button.OnClickListener Talk_Listener = new Button.OnClickListener() {
+    private OnClickListener Talk_Listener = new OnClickListener() {
         public void onClick(View v) {
             try {
                 if (m_bTalkOn == false) {
@@ -361,7 +428,7 @@ public class DemoActivity extends Activity implements Callback {
         }
     };
     // record listener
-    private Button.OnClickListener Record_Listener = new Button.OnClickListener() {
+    private OnClickListener Record_Listener = new OnClickListener() {
         public void onClick(View v) {
             if (!m_bSaveRealData) {
                 if (!HCNetSDK.getInstance().NET_DVR_SaveRealData(m_iPlayID,
@@ -387,7 +454,7 @@ public class DemoActivity extends Activity implements Callback {
         }
     };
     // capture listener
-    private Button.OnClickListener Capture_Listener = new Button.OnClickListener() {
+    private OnClickListener Capture_Listener = new OnClickListener() {
         public void onClick(View v) {
             try {
                 if (m_iPort < 0) {
@@ -425,7 +492,7 @@ public class DemoActivity extends Activity implements Callback {
         }
     };
     // playback listener
-    private Button.OnClickListener Playback_Listener = new Button.OnClickListener() {
+    private OnClickListener Playback_Listener = new OnClickListener() {
 
         public void onClick(View v) {
             try {
@@ -527,14 +594,14 @@ public class DemoActivity extends Activity implements Callback {
     /*
      * private Button.OnClickListener Playback_Listener = new
      * Button.OnClickListener() {
-     * 
+     *
      * public void onClick(View v) { try { if(m_iLogID < 0) {
      * Log.e(TAG,"please login on a device first"); return ; } if(m_iPlaybackID
      * < 0) { if(m_iPlayID >= 0 ) { Log.i(TAG, "Please stop preview first");
      * return; } PlaybackCallBack fPlaybackCallBack = getPlayerbackPlayerCbf();
      * if (fPlaybackCallBack == null) { Log.e(TAG,
      * "fPlaybackCallBack object is failed!"); return; }
-     * 
+     *
      * m_iPlaybackID = HCNetSDK.getInstance().NET_DVR_PlayBackByName(m_iLogID,
      * new String("ch0002_00010000459000200")); if(m_iPlaybackID >= 0) {
      * if(!HCNetSDK.getInstance().NET_DVR_SetPlayDataCallBack(m_iPlaybackID,
@@ -544,7 +611,7 @@ public class DemoActivity extends Activity implements Callback {
      * PlaybackControlCommand.NET_DVR_PLAYSTART, null, 0, struPlaybackInfo)) {
      * Log.e(TAG, "net sdk playback start failed!"); return ; } m_bStopPlayback
      * = false; m_oPlaybackBtn.setText("Stop");
-     * 
+     *
      * Thread thread = new Thread() { public void run() { int nProgress = -1;
      * while(true) { nProgress =
      * HCNetSDK.getInstance().NET_DVR_GetPlayBackPos(m_iPlaybackID);
@@ -552,7 +619,7 @@ public class DemoActivity extends Activity implements Callback {
      * 0 || nProgress >= 100) { break; } try { Thread.sleep(1000); } catch
      * (InterruptedException e) { // TODO Auto-generated catch block
      * e.printStackTrace(); }
-     * 
+     *
      * } } }; thread.start(); } else { Log.i(TAG,
      * "NET_DVR_PlayBackByName failed, error code: " +
      * HCNetSDK.getInstance().NET_DVR_GetLastError()); } } else {
@@ -565,7 +632,7 @@ public class DemoActivity extends Activity implements Callback {
      */
 
     // login listener
-    private Button.OnClickListener Login_Listener = new Button.OnClickListener() {
+    private OnClickListener Login_Listener = new OnClickListener() {
         public void onClick(View v) {
             try {
                 if (m_iLogID < 0) {
@@ -608,7 +675,7 @@ public class DemoActivity extends Activity implements Callback {
         }
     };
     // Preview listener
-    private Button.OnClickListener Preview_Listener = new Button.OnClickListener() {
+    private OnClickListener Preview_Listener = new OnClickListener() {
         public void onClick(View v) {
             try {
                 ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
@@ -626,12 +693,12 @@ public class DemoActivity extends Activity implements Callback {
                             //startMultiPreview();
                             startSinglePreview();
                             m_bMultiPlay = true;
-                            m_oPreviewBtn.setText("Stop");
+                            m_oPreviewBtn.setText("停止播放");
                         } else {
                             stopSinglePreview();
                             //stopMultiPreview();
                             m_bMultiPlay = false;
-                            m_oPreviewBtn.setText("Preview");
+                            m_oPreviewBtn.setText("播放实时画面");
                         }
                     } else // preivew a channel
                     {
@@ -639,7 +706,7 @@ public class DemoActivity extends Activity implements Callback {
                             startSinglePreview();
                         } else {
                             stopSinglePreview();
-                            m_oPreviewBtn.setText("Preview");
+                            m_oPreviewBtn.setText("播放实时画面");
                         }
                     }
                 } else {
@@ -651,7 +718,7 @@ public class DemoActivity extends Activity implements Callback {
         }
     };
     // configuration listener
-    private Button.OnClickListener ParamCfg_Listener = new Button.OnClickListener() {
+    private OnClickListener ParamCfg_Listener = new OnClickListener() {
         public void onClick(View v) {
             try {
                 paramCfg(m_iLogID);
@@ -674,7 +741,7 @@ public class DemoActivity extends Activity implements Callback {
         Log.i(TAG, "m_iStartChan:" + m_iStartChan);
 
         NET_DVR_PREVIEWINFO previewInfo = new NET_DVR_PREVIEWINFO();
-        previewInfo.lChannel = m_iStartChan;
+        previewInfo.lChannel = m_iStartChan + monitorChan;
         previewInfo.dwStreamType = 0; // substream
         previewInfo.bBlocked = 1;
 //         NET_DVR_CLIENTINFO struClienInfo = new NET_DVR_CLIENTINFO();
@@ -847,75 +914,75 @@ public class DemoActivity extends Activity implements Callback {
          * NET_DVR_OPEN_EZVIZ_USER_LOGIN_INFO struLoginInfo = new
          * NET_DVR_OPEN_EZVIZ_USER_LOGIN_INFO(); NET_DVR_DEVICEINFO_V30
          * struDeviceInfo = new NET_DVR_DEVICEINFO_V30();
-         * 
+         *
          * //String strInput = new String("pbsgp.p2papi.ezviz7.com"); String
          * strInput = new String("open.ys7.com"); //String strInput = new
          * String("pbdev.ys7.com"); //String strInput = new
          * String("183.136.184.67"); byte[] byInput = strInput.getBytes();
          * System.arraycopy(byInput, 0, struLoginInfo.sEzvizServerAddress, 0,
          * byInput.length);
-         * 
+         *
          * struLoginInfo.wPort = 443;
-         * 
+         *
          * strInput = new
          * String("at.43anfq0q9k8zt06vd0ppalfhc4bj177p-3k4ovrh4vu-105zgp6-jgt8edqst"
          * ); byInput = strInput.getBytes(); System.arraycopy(byInput, 0,
          * struLoginInfo.sAccessToken, 0, byInput.length);
-         * 
+         *
          * //strInput = new String("67a7daedd4654dc5be329f2289914859");
          * //byInput = strInput.getBytes(); //System.arraycopy(byInput, 0,
          * struLoginInfo.sSessionID, 0, byInput.length);
-         * 
+         *
          * //strInput = new String("ae1b9af9dcac4caeb88da6dbbf2dd8d5"); strInput
          * = new String("com.hik.visualintercom"); byInput =
          * strInput.getBytes(); System.arraycopy(byInput, 0,
          * struLoginInfo.sAppID, 0, byInput.length);
-         * 
+         *
          * //strInput = new String("78313dadecd92bd11623638d57aa5128"); strInput
          * = new String("226f102a99ad0e078504d380b9ddf760"); byInput =
          * strInput.getBytes(); System.arraycopy(byInput, 0,
          * struLoginInfo.sFeatureCode, 0, byInput.length);
-         * 
+         *
          * //strInput = new
          * String("https://pbopen.ys7.com:443/api/device/transmission");
          * strInput = new String("/api/device/transmission"); byInput =
          * strInput.getBytes(); System.arraycopy(byInput, 0, struLoginInfo.sUrl,
          * 0, byInput.length);
-         * 
+         *
          * strInput = new String("520247131"); byInput = strInput.getBytes();
          * System.arraycopy(byInput, 0, struLoginInfo.sDeviceID, 0,
          * byInput.length);
-         * 
+         *
          * strInput = new String("2"); byInput = strInput.getBytes();
          * System.arraycopy(byInput, 0, struLoginInfo.sClientType, 0,
          * byInput.length);
-         * 
+         *
          * strInput = new String("UNKNOWN"); byInput = strInput.getBytes();
          * System.arraycopy(byInput, 0, struLoginInfo.sNetType, 0,
          * byInput.length);
-         * 
+         *
          * strInput = new String("5.0.1"); byInput = strInput.getBytes();
          * System.arraycopy(byInput, 0, struLoginInfo.sOsVersion, 0,
          * byInput.length);
-         * 
+         *
          * strInput = new String("v.5.1.5.30"); byInput = strInput.getBytes();
          * System.arraycopy(byInput, 0, struLoginInfo.sSdkVersion, 0,
          * byInput.length);
-         * 
+         *
          * int iUserID = -1;
-         * 
+         *
          * iUserID =
          * HCNetSDK.getInstance().NET_DVR_CreateOpenEzvizUser(struLoginInfo,
          * struDeviceInfo);
-         * 
+         *
          * if (-1 == iUserID) { System.out.println("NET_DVR_CreateOpenEzvizUser"
          * + " err: " + HCNetSDK.getInstance().NET_DVR_GetLastError()); return
          * -1; } else {
          * System.out.println("NET_DVR_CreateOpenEzvizUser success"); }
-         * 
+         *
          * Test_XMLAbility(iUserID); Test_XMLAbility(iUserID);
          * Test_XMLAbility(iUserID);
-         * 
+         *
          * return iUserID;
          */
 
