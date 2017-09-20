@@ -39,8 +39,7 @@ public class hikvision extends CordovaPlugin {
                 intent.putExtra("port", args.getString(3));
                 intent.putExtra("channel", args.getString(4));
                 //启动activity
-                this.cordova.startActivityForResult(this, intent, 0);
-                //this.cordova.getActivity().startActivity(intent); // 启动Activity
+                this.cordova.getActivity().startActivity(intent); // 启动Activity
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -53,7 +52,7 @@ public class hikvision extends CordovaPlugin {
                 intent.putExtra("handler", args.getString(0));
                 intent.putExtra("player", args.getString(1));
                 //启动activity
-                this.cordova.startActivityForResult(this, intent, 0);
+                this.cordova.getActivity().startActivity(intent); // 启动Activity
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
