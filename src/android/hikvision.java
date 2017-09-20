@@ -48,6 +48,7 @@ public class hikvision extends CordovaPlugin {
             return true;
         } else if (action.equals("stopMonitor")) {
             try {
+                Intent intent = new Intent(this.cordova.getActivity(), DemoActivity.class);
                 intent.putExtra("handler", args.getString(0));
                 intent.putExtra("player", args.getString(1));
                 //启动activity
