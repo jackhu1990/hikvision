@@ -33,6 +33,7 @@ public class hikvision extends CordovaPlugin {
                 //通过Intent绑定将要调用的Activity
                 Intent intent = new Intent(this.cordova.getActivity(), DemoActivity.class);
                 //加入将要传输到activity中的参数
+                // Toast.makeText(context, args.toString(), Toast.LENGTH_SHORT).show();
                 intent.putExtra("username", args.getString(0));
                 intent.putExtra("password", args.getString(1));
                 intent.putExtra("ip", args.getString(2));

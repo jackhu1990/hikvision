@@ -141,7 +141,13 @@ public class DemoActivity extends Activity implements Callback {
         m_oIPAddr.setText("102.51.53.246");
         m_oPort.setText("8000");
         monitorChan = 1;
-       Toast.makeText(this.getApplicationContext(), this.getIntent().getStringExtra("username"), Toast.LENGTH_SHORT).show();
+        // 接收cordova传过来的参数
+        m_oUser.setText(this.getIntent().getStringExtra("username"));
+        m_oPsd.setText(this.getIntent().getStringExtra("password"));
+        m_oIPAddr.setText(this.getIntent().getStringExtra("ip"));
+        m_oPort.setText(this.getIntent().getStringExtra("port"));
+        monitorChan = Integer.parseInt(this.getIntent().getStringExtra("channel"));
+        Toast.makeText(this.getApplicationContext(), "初始化完成,请点击播放实时画面按钮!!", Toast.LENGTH_SHORT).show();
 
         if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             // 加入横屏要处理的代码

@@ -7,7 +7,7 @@ hikvision.prototype.startMonitor = function (successCallback, errorCallback, use
 };
 /* 使用登录句柄handler, 播放句柄player进行停止播放与退出dvr操作 */
 hikvision.prototype.stopMonitor = function (successCallback, errorCallback, handler, player) {
-    cordova.exec(successCallback, errorCallback, "hikvision", "startMonitor", [handler, player]);
+    cordova.exec(successCallback, errorCallback, "hikvision", "stopMonitor", [handler, player]);
 };
 
 hikvision.install = function () {
