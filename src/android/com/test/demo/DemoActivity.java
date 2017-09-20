@@ -1,7 +1,7 @@
 /**
  * <p>DemoActivity Class</p>
  * @author zhuzhenlei 2014-7-17
- * @version V1.0  
+ * @version V1.0
  * @modificationHistory
  * @modify by user: 
  * @modify by reason:
@@ -62,12 +62,12 @@ import com.hikvision.netsdk.PlaybackCallBack;
 import com.hikvision.netsdk.PlaybackControlCommand;
 import com.hikvision.netsdk.RealPlayCallBack;
 import com.hikvision.netsdk.RemoteConfigCallback;
-
+import android.widget.Toast;
 /**
  * <pre>
  *  ClassName  DemoActivity Class
  * </pre>
- * 
+ *
  * @author zhuzhenlei
  * @version V1.0
  * @modificationHistory
@@ -134,6 +134,10 @@ public class DemoActivity extends Activity implements Callback {
         m_oUser.setText("admin");
         m_oPsd.setText("szhj2015");
 
+
+        Toast.makeText(this.getApplicationContext(), this.getIntent().getStringExtra("username"),
+                Toast.LENGTH_SHORT).show();
+
     }
 
     // @Override
@@ -154,7 +158,7 @@ public class DemoActivity extends Activity implements Callback {
 
     // @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
-            int height) {
+                               int height) {
     }
 
     // @Override
@@ -262,7 +266,7 @@ public class DemoActivity extends Activity implements Callback {
                             Log.e(TAG,
                                     "start PAN_LEFT failed with error code: "
                                             + HCNetSDK.getInstance()
-                                                    .NET_DVR_GetLastError());
+                                            .NET_DVR_GetLastError());
                         } else {
                             Log.i(TAG, "start PAN_LEFT succ");
                         }
@@ -273,7 +277,7 @@ public class DemoActivity extends Activity implements Callback {
                             Log.e(TAG,
                                     "start PAN_RIGHT failed with error code: "
                                             + HCNetSDK.getInstance()
-                                                    .NET_DVR_GetLastError());
+                                            .NET_DVR_GetLastError());
                         } else {
                             Log.i(TAG, "start PAN_RIGHT succ");
                         }
@@ -284,7 +288,7 @@ public class DemoActivity extends Activity implements Callback {
                                 m_iLogID, m_iStartChan, PTZCommand.PAN_LEFT, 1)) {
                             Log.e(TAG, "stop PAN_LEFT failed with error code: "
                                     + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
+                                    .NET_DVR_GetLastError());
                         } else {
                             Log.i(TAG, "stop PAN_LEFT succ");
                         }
@@ -297,7 +301,7 @@ public class DemoActivity extends Activity implements Callback {
                             Log.e(TAG,
                                     "stop PAN_RIGHT failed with error code: "
                                             + HCNetSDK.getInstance()
-                                                    .NET_DVR_GetLastError());
+                                            .NET_DVR_GetLastError());
                         } else {
                             Log.i(TAG, "stop PAN_RIGHT succ");
                         }
@@ -374,7 +378,7 @@ public class DemoActivity extends Activity implements Callback {
                     System.out
                             .println("NET_DVR_StopSaveRealData failed! error: "
                                     + HCNetSDK.getInstance()
-                                            .NET_DVR_GetLastError());
+                                    .NET_DVR_GetLastError());
                 } else {
                     System.out.println("NET_DVR_StopSaveRealData succ!");
                 }
@@ -501,7 +505,7 @@ public class DemoActivity extends Activity implements Callback {
                         Log.i(TAG,
                                 "NET_DVR_PlayBackByTime failed, error code: "
                                         + HCNetSDK.getInstance()
-                                                .NET_DVR_GetLastError());
+                                        .NET_DVR_GetLastError());
                     }
                 } else {
                     m_bStopPlayback = true;
@@ -609,7 +613,7 @@ public class DemoActivity extends Activity implements Callback {
             try {
                 ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                         .hideSoftInputFromWindow(DemoActivity.this
-                                .getCurrentFocus().getWindowToken(),
+                                        .getCurrentFocus().getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
                 if (m_iLogID < 0) {
                     Log.e(TAG, "please login on device first");
@@ -1008,7 +1012,7 @@ public class DemoActivity extends Activity implements Callback {
     private RealPlayCallBack getRealPlayerCbf() {
         RealPlayCallBack cbf = new RealPlayCallBack() {
             public void fRealDataCallBack(int iRealHandle, int iDataType,
-                    byte[] pDataBuffer, int iDataSize) {
+                                          byte[] pDataBuffer, int iDataSize) {
                 // player channel 1
                 DemoActivity.this.processRealData(1, iDataType, pDataBuffer,
                         iDataSize, Player.STREAM_REALTIME);
@@ -1031,7 +1035,7 @@ public class DemoActivity extends Activity implements Callback {
         PlaybackCallBack cbf = new PlaybackCallBack() {
             @Override
             public void fPlayDataCallBack(int iPlaybackHandle, int iDataType,
-                    byte[] pDataBuffer, int iDataSize) {
+                                          byte[] pDataBuffer, int iDataSize) {
                 // player channel 1
                 DemoActivity.this.processRealData(1, iDataType, pDataBuffer,
                         iDataSize, Player.STREAM_FILE);
@@ -1059,7 +1063,7 @@ public class DemoActivity extends Activity implements Callback {
      * @return NULL
      */
     public void processRealData(int iPlayViewNo, int iDataType,
-            byte[] pDataBuffer, int iDataSize, int iStreamMode) {
+                                byte[] pDataBuffer, int iDataSize, int iStreamMode) {
         if (!m_bNeedDecode) {
             // Log.i(TAG, "iPlayViewNo:" + iPlayViewNo + ",iDataType:" +
             // iDataType + ",iDataSize:" + iDataSize);
@@ -1115,7 +1119,7 @@ public class DemoActivity extends Activity implements Callback {
                         if (i % 100 == 0) {
                             Log.e(TAG, "inputData failed with: "
                                     + Player.getInstance()
-                                            .getLastError(m_iPort) + ", i:" + i);
+                                    .getLastError(m_iPort) + ", i:" + i);
                         }
 
                         try {
