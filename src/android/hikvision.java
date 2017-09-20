@@ -36,7 +36,8 @@ public class hikvision extends CordovaPlugin {
                 intent.putExtra("username", args.getString(0));
                 intent.putExtra("password", args.getString(1));
                 intent.putExtra("ip", args.getString(2));
-                intent.putExtra("channel", args.getString(3));
+                intent.putExtra("port", args.getString(3));
+                intent.putExtra("channel", args.getString(4));
                 //启动activity
                 this.cordova.startActivityForResult(this, intent, 0);
                 //this.cordova.getActivity().startActivity(intent); // 启动Activity
