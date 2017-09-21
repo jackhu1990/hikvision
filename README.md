@@ -13,7 +13,7 @@ cordova plugin add https://github.com/jackhu1990/hikvision.git
                        alert(data);
                    }, function (data) {
                        alert(data);
-                   }, "username", "68008232", "192.168.1.1", "8000", 16)
+                   }, "username", "68008232", "192.168.1.1", "8000", "16")
                }
 ```
 
