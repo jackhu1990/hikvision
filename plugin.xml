@@ -74,6 +74,7 @@
         <framework src="OpenGLES.framework" />
         <framework src="CoreGraphics.framework" />
         <framework src="OpenAL.framework" />
+        <framework src="libiconv.tbd" />
     </platform>
 
 </plugin>
