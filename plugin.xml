@@ -53,9 +53,9 @@
         <header-file src="src/ios/CDVHikVison.h" />
         <source-file src="src/ios/CDVHikVison.m" />
         <resource-file src="src/ios/SimpleDemoViewController.xib" />
-        <source-file src="src/ios/Classes" target-dir="src" framework="true" />
-        <source-file src="src/ios/lib" target-dir="src" framework="true" />
-        <source-file src="src/ios/include" target-dir="src" framework="true" />
+        <source-file src="src/ios/Classes/" />
+        <source-file src="src/ios/lib/" />
+        <source-file src="src/ios/include/ "/>
     </platform>
 
 </plugin>
