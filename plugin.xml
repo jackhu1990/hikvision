@@ -61,6 +61,19 @@
         <source-file src="src/ios/lib/Release-iphoneos/libopensslwrap.a" framework="true" />
         <source-file src="src/ios/lib/Release-iphoneos/libplayctrl.a" framework="true" />
         <source-file src="src/ios/lib/Release-iphoneos/libSystemTransform.a" framework="true" />
+        <framework src="QuartzCore.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="GLKit.framework" />
+        <framework src="VideoToolbox.framework" />
+        <framework src="VideoToolbox.framework" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="UIKit.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="OpenGLES.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="OpenAL.framework" />
     </platform>
 
 </plugin>
