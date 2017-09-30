@@ -53,9 +53,14 @@
         <header-file src="src/ios/CDVHikVison.h" />
         <source-file src="src/ios/CDVHikVison.m" />
         <resource-file src="src/ios/SimpleDemoViewController.xib" />
+        <header-file src="src/ios/include/hcnetsdk.h" />
         <source-file src="src/ios/Classes/" />
-        <source-file src="src/ios/lib/" />
-        <source-file src="src/ios/include/" />
+        <source-file src="src/ios/lib/Release-iphoneos/libAudioEngine_64.a" framework="true" />
+        <source-file src="src/ios/lib/Release-iphoneos/libHCCore.a" framework="true" />
+        <source-file src="src/ios/lib/Release-iphoneos/libHCNetSDK.a" framework="true" />
+        <source-file src="src/ios/lib/Release-iphoneos/libopensslwrap.a" framework="true" />
+        <source-file src="src/ios/lib/Release-iphoneos/libplayctrl.a" framework="true" />
+        <source-file src="src/ios/lib/Release-iphoneos/libSystemTransform.a" framework="true" />
     </platform>
 
 </plugin>
