@@ -23,6 +23,7 @@
                 <param name="android-package" value="com.nodehope.cordova.plugins.hikvision.hikvision"/>
             </feature>
         </config-file>
+
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.INTERNET" />
         </config-file>
@@ -39,6 +40,19 @@
         <source-file src="src/android/libs/armeabi" target-dir="libs" framework="true" />
         <source-file src="src/android/hikvision.java" target-dir="src/com/nodehope/cordova/plugins/hikvision"/>
         <source-file src="src/android/res/layout/main.xml" target-dir="res/layout" framework="true" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="hikvision">
+                <param name="ios-package" value="CDVHikVison"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVHikVison.h" />
+        <source-file src="src/ios/CDVHikVison.m" />
+        <resource-file src="src/ios/SimpleDemoViewController.xib" />
     </platform>
 
 </plugin>
