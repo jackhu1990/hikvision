@@ -55,7 +55,7 @@
         <resource-file src="src/ios/SimpleDemoViewController.xib" />
         <source-file src="src/ios/Classes/" />
         <source-file src="src/ios/lib/" />
-        <source-file src="src/ios/include/ "/>
+        <source-file src="src/ios/include/" />
     </platform>
 
 </plugin>
