@@ -106,5 +106,4 @@
 - (bool) loginEZVIZDevice;
 
 - (void) setCommand:(NSString*) _username:(NSString*) _password:(NSString*) _ip:(NSString*) _port:(NSString*) _channel;
-
 @end

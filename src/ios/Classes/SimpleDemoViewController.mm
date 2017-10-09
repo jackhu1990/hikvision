@@ -337,13 +337,13 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
     // login on failed
     if (m_lUserID == -1) {
         UIAlertView *alert = [[UIAlertView alloc]
-                initWithTitle:kWarningTitle
-                      message:kLoginDeviceFailMsg
-                     delegate:nil
-            cancelButtonTitle:kWarningConfirmButton
-            otherButtonTitles:nil];
+                              initWithTitle:kWarningTitle
+                              message:kLoginDeviceFailMsg
+                              delegate:nil
+                              cancelButtonTitle:kWarningConfirmButton
+                              otherButtonTitles:nil];
         [alert show];
-//        [alert release];
+        //        [alert release];
         return false;
     }
 
@@ -396,8 +396,6 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 //back button click
 - (IBAction)backClicked:(id)sender {
     NSLog(@"backClicked");
-        [self playerBtnClicked: nil];
-        [self loginBtnClicked: nil];
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 // login button click
@@ -457,7 +455,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 //    m_devicePortField.text = @"8000";
 //    m_uerNameField.text = @"admin";
 //    m_passwordField.text = @"12345";
-
+    
     m_deviceIpField.text =ip;
     m_devicePortField.text = port;
     m_uerNameField.text = username;
@@ -480,12 +478,44 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
     g_pController = self;
     [super viewDidLoad];
 
-
-    [self loginBtnClicked: nil];
-    [self playerBtnClicked: nil];
-
 }
-
+-(void)viewDidDisappear:(BOOL)animated{
+    if (m_lRealPlayID != -1) {
+        NET_DVR_StopRealPlay(m_lRealPlayID);
+        m_lRealPlayID = -1;
+    }
+    
+    if (m_lPlaybackID != -1) {
+        NET_DVR_StopPlayBack(m_lPlaybackID);
+        m_lPlaybackID = -1;
+    }
+    
+    if (m_lUserID != -1) {
+        NET_DVR_Logout(m_lUserID);
+        NET_DVR_Cleanup();
+        m_lUserID = -1;
+    }
+}
+-(void)viewDidAppear:(BOOL)animated{
+    // init
+    BOOL bRet = NET_DVR_Init();
+    if (!bRet) {
+        NSLog(@"NET_DVR_Init failed");
+    }
+    NET_DVR_SetExceptionCallBack_V30(0, NULL, g_fExceptionCallBack, NULL);
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    const char *pDir = [documentPath UTF8String];
+    NET_DVR_SetLogToFile(3, (char *) pDir, true);
+    if ([self loginNormalDevice])
+    {
+//        g_iPreviewChanNum = [channel intValue];
+//        m_lRealPlayID = startPreview(m_lUserID, g_iStartChan, m_playView, 0);
+//        if (m_lRealPlayID >= 0) {
+//            m_bPreview = true;
+//        }
+         [self playerBtnClicked:nil];
+    }
+}
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -518,9 +548,9 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidBegin
  Description:		enter edit box,hide picture,controller up
- Input:				sender Ôº? button down
- Output:
- Return:
+ Input:				sender �? button down
+ Output:			
+ Return:			
  *******************************************************************************/
 - (IBAction) textFieldEditingDidBegin:(id)sender {
     [UIView beginAnimations:@"login.animation" context:nil];
@@ -531,9 +561,9 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidEndOnExit
  Description:		exit edit box,hide picture,controller focus change
- Input:				sender Ôº? button down
- Output:
- Return:
+ Input:				sender �? button down
+ Output:			
+ Return:			
  *******************************************************************************/
 - (IBAction) textFieldEditingDidEndOnExit:(id)sender {
     // foucs on username edit box,click done,focus on password edit box
@@ -556,7 +586,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			keyboardWillHide
  Description:		exit edit box,hide picture,controller focus change
- Input:				note Ôº? keyboard hide
+ Input:				note �? keyboard hide
  Output:			
  Return:			
  *******************************************************************************/
