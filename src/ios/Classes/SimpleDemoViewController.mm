@@ -393,7 +393,11 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
     }
     return true;
 }
-
+//back button click
+- (IBAction)backClicked:(id)sender {
+    NSLog(@"backClicked");
+   [self dismissViewControllerAnimated:YES completion:nil];
+}
 // login button click
 - (IBAction) loginBtnClicked:(id)sender {
     NSLog(@"loginBtnClicked");
@@ -451,7 +455,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 //    m_devicePortField.text = @"8000";
 //    m_uerNameField.text = @"admin";
 //    m_passwordField.text = @"12345";
-    
+
     m_deviceIpField.text =ip;
     m_devicePortField.text = port;
     m_uerNameField.text = username;
@@ -514,9 +518,9 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidBegin
  Description:		enter edit box,hide picture,controller up
- Input:				sender �? button down
- Output:			
- Return:			
+ Input:				sender Ôº? button down
+ Output:
+ Return:
  *******************************************************************************/
 - (IBAction) textFieldEditingDidBegin:(id)sender {
     [UIView beginAnimations:@"login.animation" context:nil];
@@ -527,9 +531,9 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidEndOnExit
  Description:		exit edit box,hide picture,controller focus change
- Input:				sender �? button down
- Output:			
- Return:			
+ Input:				sender Ôº? button down
+ Output:
+ Return:
  *******************************************************************************/
 - (IBAction) textFieldEditingDidEndOnExit:(id)sender {
     // foucs on username edit box,click done,focus on password edit box
@@ -552,7 +556,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			keyboardWillHide
  Description:		exit edit box,hide picture,controller focus change
- Input:				note �? keyboard hide
+ Input:				note Ôº? keyboard hide
  Output:			
  Return:			
  *******************************************************************************/

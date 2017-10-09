@@ -86,6 +86,7 @@
 -(IBAction) ptzBtnClicked:(id)sender;
 -(IBAction) ptzBtnClickedUp:(id)sender;
 -(IBAction) otherBtnClicked:(id)sender;
+-(IBAction) backClicked:(id)sender;
 
 // enter/exit edit box
 - (IBAction) textFieldEditingDidBegin:(id)sender;
