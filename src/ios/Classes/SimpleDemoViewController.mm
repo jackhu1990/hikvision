@@ -187,7 +187,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 // preview button Click
 - (IBAction) playerBtnClicked:(id)sender {
     NSLog(@"liveStreamBtnClicked");
-    g_iPreviewChanNum = 1;
+    g_iPreviewChanNum = [channel intValue];
     if (g_iPreviewChanNum > 1) {
         if (!m_bPreview) {
             int iPreviewID[MAX_VIEW_NUM] = {0};
@@ -447,10 +447,15 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
     m_bRecord = false;
     m_bPTZL = false;
 
-    m_deviceIpField.text = @"192.168.1.252";
-    m_devicePortField.text = @"8000";
-    m_uerNameField.text = @"admin";
-    m_passwordField.text = @"12345";
+//    m_deviceIpField.text = @"192.168.1.252";
+//    m_devicePortField.text = @"8000";
+//    m_uerNameField.text = @"admin";
+//    m_passwordField.text = @"12345";
+    
+    m_deviceIpField.text =ip;
+    m_devicePortField.text = port;
+    m_uerNameField.text = username;
+    m_passwordField.text = password;
 
     int nWidth = m_playView.frame.size.width / 2;
     int nHeight = m_playView.frame.size.height / 2;
@@ -571,5 +576,12 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 //
 //    [super dealloc];
 //}
+- (void) setCommand:(NSString*) _username:(NSString*) _password:(NSString*) _ip:(NSString*) _port:(NSString*) _channel{
+    username = _username;
+    password = _password;
+    ip = _ip;
+    port = _port;
+    channel = _channel;
+}
 
 @end

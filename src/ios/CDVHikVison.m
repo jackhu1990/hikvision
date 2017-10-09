@@ -12,6 +12,7 @@
         NSString* port = command.arguments[3];
         NSString* channel = command.arguments[4];
          SimpleDemoViewController* testViewCtrl = [[SimpleDemoViewController alloc]init];
+        [testViewCtrl setCommand:username:password:ip:port:channel];
         [self.viewController presentViewController:testViewCtrl animated:YES completion:^{
         }];
     }
