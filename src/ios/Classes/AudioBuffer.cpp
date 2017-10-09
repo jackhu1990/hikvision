@@ -34,7 +34,7 @@ bool AudioBuffer::initBuffer(unsigned int bufferPackNum)
             memset(pack, 0, sizeof(AudioPackage));
             
             m_idleQueue.push(pack);
-        }
+}
     } catch (...) {
         releaseBuffer();
         return false;

@@ -54,7 +54,27 @@
         <source-file src="src/ios/CDVHikVison.m" />
         <resource-file src="src/ios/SimpleDemoViewController.xib" />
         <header-file src="src/ios/include/hcnetsdk.h" />
-        <source-file src="src/ios/Classes/" />
+        <source-file src="src/ios/Classes/AlarmTest.mm" />
+        <source-file src="src/ios/Classes/AudioBuffer.cpp" />
+        <source-file src="src/ios/Classes/AudioBuffer.h" />
+        <source-file src="src/ios/Classes/AudioCodecDef.h" />
+        <source-file src="src/ios/Classes/AudioEngine.h" />
+        <source-file src="src/ios/Classes/ConfigTest.mm" />
+        <source-file src="src/ios/Classes/DeviceInfo.h" />
+        <source-file src="src/ios/Classes/DeviceInfo.m" />
+        <source-file src="src/ios/Classes/EzvizTrans.h" />
+        <source-file src="src/ios/Classes/HikDec.h" />
+        <source-file src="src/ios/Classes/ManageTest.mm" />
+        <source-file src="src/ios/Classes/OtherTest.h" />
+        <source-file src="src/ios/Classes/OtherTest.mm" />
+        <source-file src="src/ios/Classes/Preview.h" />
+        <source-file src="src/ios/Classes/Preview.mm" />
+        <source-file src="src/ios/Classes/PTZTest.mm" />
+        <source-file src="src/ios/Classes/SimpleDemoViewController.h" />
+        <source-file src="src/ios/Classes/SimpleDemoViewController.mm" />
+        <source-file src="src/ios/Classes/VoiceTalk.h" />
+        <source-file src="src/ios/Classes/VoiceTalk.mm" />
+
         <source-file src="src/ios/lib/Release-iphoneos/libAudioEngine_64.a" framework="true" />
         <source-file src="src/ios/lib/Release-iphoneos/libHCCore.a" framework="true" />
         <source-file src="src/ios/lib/Release-iphoneos/libHCNetSDK.a" framework="true" />

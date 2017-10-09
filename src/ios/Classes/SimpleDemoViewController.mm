@@ -255,50 +255,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 // playback button click (bytime)
 - (IBAction) playbackBtnClicked:(id)sender {
     NSLog(@"playbackBtnClicked");
-    if (m_lPlaybackID == -1) {
-        if (m_lUserID == -1) {
-            NSLog(@"Please login on the device first!");
-            return;
-        }
-
-        NET_DVR_TIME struStartTime = {0};
-        NET_DVR_TIME struEndTime = {0};
-        struStartTime.dwYear = 2016;
-        struStartTime.dwMonth = 10;
-        struStartTime.dwDay = 17;
-
-        struEndTime.dwYear = 2016;
-        struEndTime.dwMonth = 11;
-        struEndTime.dwDay = 17;
-
-        m_lPlaybackID = NET_DVR_PlayBackByTime(m_lUserID, g_iStartChan, &struStartTime, &struEndTime, m_playView);
-        if (m_lPlaybackID == -1) {
-            NSLog(@"NET_DVR_PlayBackByTime failed:%d", NET_DVR_GetLastError());
-            UIAlertView *alert = [[UIAlertView alloc]
-                    initWithTitle:kWarningTitle
-                          message:kRealPlayFailMsg
-                         delegate:nil
-                cancelButtonTitle:kWarningConfirmButton
-                otherButtonTitles:nil];
-            [alert show];
-            [alert release];
-
-            [self stopPlayback];
-            return;
-        }
-
-        if (!NET_DVR_PlayBackControl_V40(m_lPlaybackID, NET_DVR_PLAYSTART, NULL, 0, NULL, NULL)) {
-            NSLog(@"NET_DVR_PlayBackControl_V40 failed:%d", NET_DVR_GetLastError());
-            [self stopPlayback];
-            return;
-        }
-        m_bStopPlayback = false;
-        [m_playbackButton setTitle:@"Stop Playback" forState:UIControlStateNormal];
-    } else {
-        m_bStopPlayback = true;
-        [self stopPlayback];
-        [m_playbackButton setTitle:@"Start Playback" forState:UIControlStateNormal];
-    }
+    
 }
 
 /*
@@ -386,7 +343,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
             cancelButtonTitle:kWarningConfirmButton
             otherButtonTitles:nil];
         [alert show];
-        [alert release];
+//        [alert release];
         return false;
     }
 
@@ -431,7 +388,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
             cancelButtonTitle:kWarningConfirmButton
             otherButtonTitles:nil];
         [alert show];
-        [alert release];
+//        [alert release];
         return false;
     }
     return true;
@@ -606,13 +563,13 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
     return YES;
 }
 
-- (void)dealloc {
-    if (m_playView != nil) {
-        [m_playView release];
-        m_playView = nil;
-    }
-
-    [super dealloc];
-}
+//- (void)dealloc {
+//    if (m_playView != nil) {
+//        [m_playView release];
+//        m_playView = nil;
+//    }
+//
+//    [super dealloc];
+//}
 
 @end

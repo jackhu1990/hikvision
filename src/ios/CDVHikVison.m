@@ -1,5 +1,5 @@
 #import "CDVHikVison.h"
-#import "Classes/SimpleDemoViewController.h"
+#import "SimpleDemoViewController.h"
 
 @implementation CDVHikVison
 
