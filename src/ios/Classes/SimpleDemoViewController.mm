@@ -396,6 +396,8 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 //back button click
 - (IBAction)backClicked:(id)sender {
     NSLog(@"backClicked");
+        [self playerBtnClicked: nil];
+        [self loginBtnClicked: nil];
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 // login button click
@@ -508,8 +510,6 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
         NET_DVR_Cleanup();
         m_lUserID = -1;
     }
-    [self playerBtnClicked: nil];
-    [self loginBtnClicked: nil];
 }
 
 #pragma mark -
