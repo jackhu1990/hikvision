@@ -187,7 +187,8 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 // preview button Click
 - (IBAction) playerBtnClicked:(id)sender {
     NSLog(@"liveStreamBtnClicked");
-    g_iPreviewChanNum = [channel intValue];
+    g_iStartChan = [channel intValue];
+    g_iPreviewChanNum = 0;
     if (g_iPreviewChanNum > 1) {
         if (!m_bPreview) {
             int iPreviewID[MAX_VIEW_NUM] = {0};
@@ -255,7 +256,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 // playback button click (bytime)
 - (IBAction) playbackBtnClicked:(id)sender {
     NSLog(@"playbackBtnClicked");
-    
+
 }
 
 /*
@@ -270,7 +271,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
             NSLog(@"Please login on the device first!");
             return;
         }
-        
+
         m_lPlaybackID = NET_DVR_PlayBackByName(m_lUserID, "ch0001_00010000091000000", m_playView);
         if (m_lPlaybackID == -1)
         {
@@ -283,11 +284,11 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
                                   otherButtonTitles:nil];
             [alert show];
             [alert release];
-            
+
             [self stopPlayback];
             return;
         }
-        
+
         if (!NET_DVR_PlayBackControl_V40(m_lPlaybackID, NET_DVR_PLAYSTART, NULL, 0, NULL, NULL))
         {
             NSLog(@"NET_DVR_PlayBackControl_V40 failed:%d",  NET_DVR_GetLastError());
@@ -455,7 +456,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 //    m_devicePortField.text = @"8000";
 //    m_uerNameField.text = @"admin";
 //    m_passwordField.text = @"12345";
-    
+
     m_deviceIpField.text =ip;
     m_devicePortField.text = port;
     m_uerNameField.text = username;
@@ -484,12 +485,12 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
         NET_DVR_StopRealPlay(m_lRealPlayID);
         m_lRealPlayID = -1;
     }
-    
+
     if (m_lPlaybackID != -1) {
         NET_DVR_StopPlayBack(m_lPlaybackID);
         m_lPlaybackID = -1;
     }
-    
+
     if (m_lUserID != -1) {
         NET_DVR_Logout(m_lUserID);
         NET_DVR_Cleanup();
@@ -548,9 +549,9 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidBegin
  Description:		enter edit box,hide picture,controller up
- Input:				sender �? button down
- Output:			
- Return:			
+ Input:				sender Ôº? button down
+ Output:
+ Return:
  *******************************************************************************/
 - (IBAction) textFieldEditingDidBegin:(id)sender {
     [UIView beginAnimations:@"login.animation" context:nil];
@@ -561,9 +562,9 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidEndOnExit
  Description:		exit edit box,hide picture,controller focus change
- Input:				sender �? button down
- Output:			
- Return:			
+ Input:				sender Ôº? button down
+ Output:
+ Return:
  *******************************************************************************/
 - (IBAction) textFieldEditingDidEndOnExit:(id)sender {
     // foucs on username edit box,click done,focus on password edit box
@@ -586,7 +587,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			keyboardWillHide
  Description:		exit edit box,hide picture,controller focus change
- Input:				note �? keyboard hide
+ Input:				note Ôº? keyboard hide
  Output:			
  Return:			
  *******************************************************************************/
