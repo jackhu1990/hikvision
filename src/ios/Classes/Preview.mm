@@ -17,7 +17,7 @@ int startPreview(int iUserID, int iStartChan, UIView *pView, int iIndex)
     // request stream
     NET_DVR_PREVIEWINFO struPreviewInfo = {0};
     struPreviewInfo.lChannel = iStartChan + iIndex;
-    struPreviewInfo.dwStreamType = 1;
+    struPreviewInfo.dwStreamType = 0;
     struPreviewInfo.bBlocked = 1;
     struPreviewInfo.hPlayWnd = (__bridge void *)pView;
     g_iPreviewHandle[iIndex] = NET_DVR_RealPlay_V40(iUserID, &struPreviewInfo, NULL, NULL);
