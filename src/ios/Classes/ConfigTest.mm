@@ -48,7 +48,6 @@ void Test_GetPTZProtocol(int iUserID)
         NSLog(@"NET_DVR_GetPTZProtocol succ");
     }
 }
-
 void Test_DeviceCfg_V40(int iUserID)
 {
     NET_DVR_DEVICECFG_V40 struDevCfg = {0};
@@ -588,7 +587,7 @@ void TEST_Config(int iPreviewID, int iUserID, int iChan)
 {
 //    Test_GetDeviceAbility(iUserID, iChan);
 //    Test_GetPTZProtocol(iUserID);
-//      Test_DeviceCfg_V40(iUserID);
+//    Test_DeviceCfg_V40(iUserID);
 //    Test_NetCfg_V30(iUserID);
 //    Test_PicCfg_V30(iUserID, iChan);
 //    Test_CompressionCfg_V30(iUserID, iChan);
@@ -596,7 +595,7 @@ void TEST_Config(int iPreviewID, int iUserID, int iChan)
 //    Test_IPAlarmoutCfg(iUserID);
 //    Test_IPParaCfg_V40(iUserID);
 //    Test_AlarminCfg_V30(iUserID);
-//    Test_AlarmOutCfg_V30(iUserID);
+    Test_AlarmOutCfg_V30(iUserID);
 //    Test_NTPPara(iUserID);
 //    Test_DecoderCfg_V30(iUserID);
 //    Test_AuxAlarmCfg(iUserID);
@@ -617,55 +616,3 @@ void TEST_Config(int iPreviewID, int iUserID, int iChan)
 //    Test_UpnpNatState(iUserID);
 //    Test_GetCurrentAudioCompression_V50(iUserID);
 }
-
-
-void Test_Ezvize_DDNS()
-{
-    NSURL *url = [NSURL URLWithString:@"https://open.ezvizlife.com/api/lapp/token/get"];
-    NSString *body = [NSString stringWithFormat:@"appKey=%@&appSecret=%@", @"", @""]; //appKey & appSecret
-    NSLog(@"body: %@", body);
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSData *recvData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    if(recvData || recvData.length == 0)
-    {
-        NSLog(@"recvData == null");
-    }
-    NSString *str = [[NSString alloc] initWithData:recvData encoding:NSASCIIStringEncoding];
-    NSLog(@"retdata == %@", str);
-
-    NSString *accessToken;
-    if(([str rangeOfString:@"code"].location != NSNotFound) || ([str rangeOfString:@"200"].location != NSNotFound)){
-        accessToken = [str substringWithRange:NSMakeRange(24, 64)];
-        NSLog(@"accessToken:%@",accessToken);
-        
-    }
-    get_ddns_info(accessToken);
-}
-
-void get_ddns_info(NSString *accessToken)
-{
-    NSString *domain = @"https://isgpopen.ezvizlife.com";
-    NSString *deviceSerial = @"602900727";
-    
-    NSURL *url = [NSURL URLWithString:@"https://open.ezvizlife.com/api/lapp/ddns/get"];
-    NSString *body = [NSString stringWithFormat:@"accessToken=%@&deviceSerial=%@", accessToken, deviceSerial];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:url];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSData *recvData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    if(recvData == NULL)
-    {
-        NSLog(@"recvData == null");
-    }
-
-    NSString *str = [[NSString alloc] initWithData:recvData encoding:NSASCIIStringEncoding];
-    NSLog(@"str == %@", str);}
-

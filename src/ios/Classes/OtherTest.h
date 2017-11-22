@@ -17,7 +17,6 @@ void TEST_PTZ(int iPreviewID, int iUserID, int iChan);
 void TEST_Config(int iPreviewID, int iUserID, int iChan);
 void TEST_Other(int iPreviewID, int iUserID, int iChan, int iPlaybackID = -1);
 void TEST_Alarm(int iUserID);
-void Test_Ezvize_DDNS();
 //common function
 void g_GetFileName(char* pFileName, char* pExtend);
 //PTZ
@@ -90,6 +89,4 @@ void Test_ZeroChanPreview(int iUserID, int iChan);
 void Test_TransChannel(int iUserID);
 void Test_Serial(int iUserID);
 void Test_PlaybackSaveData(int iPlaybackID);
-
-void get_ddns_info(NSString *accessToken);
 #endif

@@ -18,6 +18,8 @@ CAudioEngine g_audioEngine(CAE_INTERCOM);
 int g_iTalkID = -1;
 AudioBuffer*  g_audioBuffer;
 
+
+
 dispatch_source_t _sendTimer;
 
 NSTimeInterval getTimerIntervalWithAudioCodecParam(AudioCodecParam* audioCodecparam)
@@ -92,6 +94,7 @@ void timeOutOfSendTimer()
                     //   NSLog(@"_audioBuffer->readPackage failed!");
                 }
             }
+
         }
 
 }
@@ -102,15 +105,14 @@ void fVoiceTalkRecordCallBack(OutputDataInfo* pstDataInfo, void* pUser)
     
     if (g_iTalkID >= 0 )
     {
-
         if (g_audioBuffer) {
             //read to buffer
             if (!g_audioBuffer->writePackage(pstDataInfo->pData, pstDataInfo->dwDataLen))
             {
                 NSLog(@"_audioBuffer->writePackage failed!");
             }
-
         }
+
     }
 
 }
@@ -225,7 +227,6 @@ int startVoiceTalk(int iUserID)
     {
         stopVoiceTalk();
         NSLog(@"NET_DVR_StartVoiceCom_MR_V30 falied[%d]", NET_DVR_GetLastError());
-//        g_audioBuffer.releaseBuffer();
         return -1;
     }
     

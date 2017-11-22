@@ -67,7 +67,6 @@
         <source-file src="src/ios/Classes/EzvizLifeViewController.m" />
         <source-file src="src/ios/Classes/EzvizLifeViewController.xib" />
         <source-file src="src/ios/Classes/EzvizTrans.h" />
-        <source-file src="src/ios/Classes/hcnetsdk.h" />
         <source-file src="src/ios/Classes/HikDec.h" />
         <source-file src="src/ios/Classes/IOSPlayM4.h" />
         <source-file src="src/ios/Classes/ManageTest.mm" />
@@ -78,14 +77,10 @@
         <source-file src="src/ios/Classes/Preview.h" />
         <source-file src="src/ios/Classes/Preview.mm" />
         <source-file src="src/ios/Classes/PTZTest.mm" />
-        <source-file src="src/ios/Classes/SimpleDemo-Bridging-Header.h" />
         <source-file src="src/ios/Classes/SimpleDemoAppDelegate.h" />
-        <source-file src="src/ios/Classes/SimpleDemoAppDelegate.mm" />
+        <source-file src="src/ios/Classes/SimpleDemoAppDelegate.m" />
         <source-file src="src/ios/Classes/SimpleDemoViewController.h" />
-        <source-file src="src/ios/Classes/SimpleDemoViewController.mm" />
-        <source-file src="src/ios/Classes/TestSwift.h" />
-        <source-file src="src/ios/Classes/TestSwift.mm" />
-        <source-file src="src/ios/Classes/TestSwift.swift" />
+        <source-file src="src/ios/Classes/SimpleDemoViewController.mm" />>
         <source-file src="src/ios/Classes/VoiceTalk.h" />
         <source-file src="src/ios/Classes/VoiceTalk.mm" />
 

@@ -71,10 +71,10 @@ NSURLRequest* request;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc {
-    [webview release];
-    [super dealloc];
-}
+//- (void)dealloc {
+//    [webview release];
+//    [super dealloc];
+//}
 
 
 @end
