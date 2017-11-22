@@ -30,6 +30,7 @@
 	
 	UIView                  *m_playView;
     UIView                  *m_multiView[4];
+    int                     m_nPlaybackPort;
 	
 	id                      m_playThreadID;
 	bool					m_bThreadRun;
@@ -41,7 +42,7 @@
     bool                    m_bPTZL;
     bool                    m_bVoiceTalk;
     bool                    m_bStopPlayback;
-    
+    bool                    m_bSwiftFlag;
     NSString* username;
     NSString* password;
     NSString* ip;
@@ -64,7 +65,7 @@
 @property (nonatomic, retain) IBOutlet UIButton     *m_talkButton;
 @property (nonatomic, retain) IBOutlet UIButton     *m_ptzButton;
 @property (nonatomic, retain) IBOutlet UIButton     *m_otherButton;
-
+@property int  m_nPlaybackPort;
 @property (nonatomic, retain) id m_playThreadID;
 @property bool m_bThreadRun;
 @property int m_lUserID;
@@ -75,6 +76,7 @@
 @property bool m_bPTZL;
 @property bool m_bVoiceTalk;
 @property bool m_bStopPlayback;
+@property bool m_bSwiftFlag;
 
 -(IBAction) playerBtnClicked:(id)sender;
 -(IBAction) playbackBtnClicked:(id)sender;

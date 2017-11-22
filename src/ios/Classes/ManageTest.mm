@@ -209,9 +209,15 @@ void Test_GetFileByName(int iUserID)
 {
     char szSavedFileName[256] = {0};
     g_GetFileName(szSavedFileName, "mp4");
-    int nDownload = NET_DVR_GetFileByName(iUserID, "ch0001_00010000021000100", szSavedFileName);
+    int iTransType = 5;
+    int nDownload = NET_DVR_GetFileByName(iUserID, "ch0001_02000000012000000", szSavedFileName);
     if(nDownload >= 0)
     {
+        if(!NET_DVR_PlayBackControl_V40(nDownload, NET_DVR_SET_TRANS_TYPE, &iTransType, sizeof(iTransType), NULL, 0))
+        {
+            NSLog(@"NET_DVR_PlayBackControl_V40,err = %d", NET_DVR_GetLastError());
+        }
+        
         NET_DVR_PlayBackControl_V40(nDownload, NET_DVR_PLAYSTART, NULL, 0, NULL, NULL);
         int nProgress = 0;
         while(1)
@@ -434,12 +440,12 @@ void TEST_Manage(int iUserID, int iChan)
 //    Test_FindFile_V30(iUserID,iChan);
 //    Test_FormatDisk(iUserID);
 //    Test_UpdateRecordIndex(iUserID, iChan);
-//    Test_GetFileByName(iUserID);
+    Test_GetFileByName(iUserID);
 //    Test_GetFileByTime(iUserID, iChan);
 //    Test_FindFileByEvent(iUserID);
 //    Test_DVRSetConnectTime();
 //    Test_DVRSetReConnect();
 //    Test_GetSDKVersion();
 //    Test_SetRecvTimeOut();
-    Test_FindFileByEvent_V40(iUserID);
+//    Test_FindFileByEvent_V40(iUserID);
 }
