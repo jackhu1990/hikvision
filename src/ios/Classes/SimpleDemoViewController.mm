@@ -549,7 +549,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidBegin
  Description:		enter edit box,hide picture,controller up
- Input:				sender ï¼? button down
+ Input:				sender ï¿½? button down
  Output:			
  Return:			
  *******************************************************************************/
@@ -562,7 +562,7 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
 /*******************************************************************************
  Function:			textFieldEditingDidEndOnExit
  Description:		exit edit box,hide picture,controller focus change
- Input:				sender ï¼? button down
+ Input:				sender ï¿½? button down
  Output:			
  Return:			
  *******************************************************************************/
@@ -584,10 +584,15 @@ void g_fExceptionCallBack(DWORD dwType, LONG lUserID, LONG lHandle, void *pUser)
     }
 }
 
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+
 /*******************************************************************************
  Function:			keyboardWillHide
  Description:		exit edit box,hide picture,controller focus change
- Input:				note ï¼? keyboard hide
+ Input:				note ï¿½? keyboard hide
  Output:			
  Return:			
  *******************************************************************************/
